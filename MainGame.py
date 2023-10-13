@@ -6,10 +6,10 @@ import random
 pygame.init
 pygame.font.init()
 #__Title + Icon
-hinh_nen = pygame.image.load('PNG\LLL.png')
+hinh_nen = pygame.image.load('PNG/LLL.png')
 hinh_nen = pygame.transform.scale(hinh_nen,(500,600))
 pygame.display.set_caption('Đua xeee')
-icon = pygame.image.load("PNG\Icon.png")
+icon = pygame.image.load("PNG/Icon.png")
 pygame.display.set_icon(icon)
 #__Tạo cửa sổ game
 width = 500
@@ -52,7 +52,7 @@ class Vehicle(pygame.sprite.Sprite):
 class PlayVehicle(Vehicle):
     count = 0
     def __init__(self, x, y):
-        image = pygame.image.load('PNG\car.png')
+        image = pygame.image.load('PNG/car.png')
         super().__init__(image,x,y)
 #__Nhom doi tuong
 player_group = pygame.sprite.Group()
@@ -61,13 +61,13 @@ Vehicle_group = pygame.sprite.Group()
 player = PlayVehicle(car_x,car_y)
 player_group.add(player)
 #__Load xe chướng ngại vật
-image_name = ['PNG\pickup_truck.png','PNG\semi_trailer.png','PNG\Taxi.png','PNG\Van.png']
+image_name = ['PNG/pickup_truck.png','PNG/semi_trailer.png','PNG/Taxi.png','PNG/Van.png']
 Vehicle_images = []
 for name in image_name:
     image = pygame.image.load(name)
     Vehicle_images.append(image)
 #__Load va cham
-crash = pygame.image.load('PNG\crash.png')
+crash = pygame.image.load('PNG/crash.png')
 carsh_rect = crash.get_rect()
 #__Màu
 xam_dam = (78,73,73)
@@ -99,12 +99,14 @@ def draw_hs_menu():
     font3 = pygame.font.SysFont('arial',28)
     font4 = pygame.font.SysFont('arial',24)
     font5 = pygame.font.SysFont('arial',24)
+    menu_button = font.render('M_Menu', True,(255,255,255))
     title2 = font.render('High Score Board:',True,(255,255,255))
     hs1 = font1.render('Top 1.  ' + str(top[0]),True,(255,255,255))
     hs2 = font2.render('Top 2.  ' + str(top[1]),True,(255,255,255))
     hs3 = font3.render('Top 3.  ' + str(top[2]),True,(255,255,255))
     hs4 = font4.render('Top 4.  ' + str(top[3]),True,(255,255,255))
     hs5 = font5.render('Top 5.  ' + str(top[4]),True,(255,255,255))
+    screen.blit(menu_button, (width/2 - menu_button.get_width()/2, height/1.1 - menu_button.get_height()/2))
     screen.blit(title2,(width/2 - title2.get_width()/2, height/8 - title2.get_height()/2))
     screen.blit(hs1,(width/2 - hs1.get_width()/2, height/4 - hs1.get_height()/2))
     screen.blit(hs2,(width/2 - hs2.get_width()/2, height/2.5 - hs2.get_height()/2))
@@ -114,7 +116,7 @@ def draw_hs_menu():
     pygame.display.update()
 #__Nhac nen
 pygame.mixer.init(44100, -16,2,2048)
-music = pygame.mixer.music.load("MP3\Bbackground.wav")
+music = pygame.mixer.music.load("MP3/Bbackground.wav")
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play()
 #__Vòng lặp game
@@ -168,7 +170,7 @@ while True:
         #__Vẽ làn đường
         lan_move_y += speed
         if lan_move_y >= vien_cao*2:
-           lan_move_y=0
+            lan_move_y=0
         for y in range(vien_cao* -2,height,vien_cao*2):
             pygame.draw.rect(screen,white,(lan_trai-10,y+lan_move_y,vien_rong,vien_cao))
             pygame.draw.rect(screen,white,(lan_phai-100,y+lan_move_y,vien_rong,vien_cao))
@@ -216,7 +218,7 @@ while True:
             text = font.render('Y_Yes    N_No    M_Menu', True, white)
             text_rect = text.get_rect()
             text_rect.center=(width/2,165)
-            screen.blit(text,text_rect)   
+            screen.blit(text,text_rect)
             if score > top[4]:
                 top[4] = score
                 top.sort(reverse=True)
