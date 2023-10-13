@@ -76,6 +76,8 @@ green = (76,208,56)
 yellow = (255,232,0)
 red = (200,0,0)
 white = (255,255,255)
+#__Background random
+random_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 #__Cài đặt FPS
 clock = pygame.time.Clock()
 fps = 120
@@ -133,8 +135,12 @@ while True:
         if event.type == KEYDOWN:
             if event.key == K_LEFT and player.rect.center[0] > lan_trai:
                 player.rect.x -= 100
-            if event.key == K_RIGHT and player.rect.center[0] < lan_phai-100:
+            elif event.key == K_RIGHT and player.rect.center[0] < lan_phai-100:
                 player.rect.x += 100
+            elif event.key == K_UP:
+                player.rect.y -= 50
+            elif event.key == K_DOWN and player.rect.center[0] > 0:
+                player.rect.y += 50
         #__Kiểm tra va chạm
         for vehiclee in Vehicle_group:
             if pygame.sprite.collide_rect(player,vehicle):
@@ -161,7 +167,7 @@ while True:
             game_over = False
     elif game_state == "game":
         #__Vẽ nền
-        screen.fill(green)
+        screen.fill(random_color)
         #__Vẽ đường chạy
         pygame.draw.rect(screen,xam_dam,road)
         #__Vẽ lề đường
@@ -225,6 +231,8 @@ while True:
         pygame.display.update()
     while gameover:
             clock.tick(fps)
+            #__Set Background
+            random_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             for event in pygame.event.get():
                 if event.type == QUIT:
                     gameover = False
@@ -234,6 +242,7 @@ while True:
                     if event.key == K_y:
                         #__Reset game
                         gameover = False
+                        screen.fill(random_color)
                         score = 0
                         speed = 2
                         Vehicle_group.empty()
