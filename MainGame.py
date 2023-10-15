@@ -20,6 +20,7 @@ screen = pygame.display.set_mode(screen_size)
 game_state = "start_menu"
 gameplay = False
 gameover = False
+paused = False
 speed = 2
 score = 0
 road_width = 300
@@ -133,7 +134,9 @@ while True:
             quit()
         #__Điều khiển xe:
         if event.type == KEYDOWN:
-            if event.key == K_LEFT and player.rect.center[0] > lan_trai:
+            if event.key == pygame.K_p:
+                paused = not paused
+            elif event.key == K_LEFT and player.rect.center[0] > lan_trai:
                 player.rect.x -= 100
             elif event.key == K_RIGHT and player.rect.center[0] < lan_phai-100:
                 player.rect.x += 100
@@ -149,6 +152,13 @@ while True:
     if pygame.sprite.spritecollide(player,Vehicle_group,True):
         gameover = True
         carsh_rect.center = [player.rect.center[0],player.rect.top]
+    if paused:
+        # Hiển thị thông báo "PAUSE" khi trạng thái tạm dừng
+        font = pygame.font.SysFont('arial', 36)
+        pause_text = font.render('PAUSE', True, (255, 0, 0))
+        screen.blit(pause_text, (width / 2 - pause_text.get_width() / 2, height / 2 - pause_text.get_height() / 2))
+        pygame.display.update()
+        continue  # Dừng lại và không vẽ trạng thái trò chơi
     if game_state == "start_menu":
         screen.blit(hinh_nen,(0,0))
         draw_start_menu()
