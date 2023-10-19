@@ -8,10 +8,10 @@ import arcade
 pygame.init
 pygame.font.init()
 #__Title + Icon
-hinh_nen = pygame.image.load('C:\Pyyyncll\cargame\PNG\LLL.png')
+hinh_nen = pygame.image.load('PNG\LLL.png')
 hinh_nen = pygame.transform.scale(hinh_nen,(500,600))
 pygame.display.set_caption('Đua xeee')
-icon = pygame.image.load("C:\Pyyyncll\cargame\PNG\Icon.png")
+icon = pygame.image.load("PNG\Icon.png")
 pygame.display.set_icon(icon)
 #__Tạo cửa sổ game
 width = 500
@@ -53,7 +53,7 @@ class Vehicle(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [x,y]
 #__Xe của người chơi
-car_name = ['C:\Pyyyncll\cargame\PNG\car1.png','C:\Pyyyncll\cargame\PNG\car2.png','C:\Pyyyncll\cargame\PNG\car3.png','C:\Pyyyncll\cargame\PNG\car4.png','C:\Pyyyncll\cargame\PNG\car5.png']
+car_name = ['PNG\car1.png','PNG\car2.png','PNG\car3.png','PNG\car4.png','PNG\car5.png']
 Car_images = random.randint(0,4)
 class PlayVehicle(Vehicle):
 
@@ -61,7 +61,7 @@ class PlayVehicle(Vehicle):
         image = pygame.image.load(car_name[Car_images])
         super().__init__(image,x,y)
 #__Coin
-Coin_name = "C:\Pyyyncll\cargame\PNG\Coin.png"
+Coin_name = "PNG\Coin.png"
 class Coinn(Vehicle):
     def __init__(self, x, y):
         Coin_icon = pygame.image.load(Coin_name)
@@ -74,13 +74,13 @@ Coin_group = pygame.sprite.Group()
 player = PlayVehicle(car_x,car_y)
 player_group.add(player)
 #__Load xe chướng ngại vật
-image_name = ['C:\Pyyyncll\cargame\PNG\pickup_truck.png','C:\Pyyyncll\cargame\PNG\semi_trailer.png','C:\Pyyyncll\cargame\PNG\Taxi.png','C:\Pyyyncll\cargame\PNG\Van.png']
+image_name = ['PNG\pickup_truck.png','PNG\semi_trailer.png','PNG\Taxi.png','PNG\Van.png']
 Vehicle_images = []
 for name in image_name:
     image = pygame.image.load(name)
     Vehicle_images.append(image)
 #__Load va cham
-crash = pygame.image.load('C:\Pyyyncll\cargame\PNG\crash.png')
+crash = pygame.image.load('PNG\crash.png')
 carsh_rect = crash.get_rect()
 #__Màu
 xam_dam = (78,73,73)
@@ -131,11 +131,11 @@ def draw_hs_menu():
     pygame.display.update()
 #__Nhac nen
 pygame.mixer.init(44100, -16,2,2048)
-music = pygame.mixer.music.load("C:\Pyyyncll\cargame\WAV\DBTT=)).wav")
-pygame.mixer.music.set_volume(0)
+music = pygame.mixer.music.load("WAV\DBTT=)).wav")
+pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.play(-1)
-vacham = sa.WaveObject.from_wave_file('C:\Pyyyncll\cargame\WAV\Vacham.wav')
-cp = arcade.load_sound('C:\Pyyyncll\cargame\WAV\CoinSound.wav')
+vacham = sa.WaveObject.from_wave_file('WAV\Vacham.wav')
+cp = arcade.load_sound('WAV\CoinSound.wav')
 #__Vòng lặp game
 running = True
 while True:
@@ -305,6 +305,7 @@ while True:
                     topc[i] = topc[idx]
                     topc[idx] = swap
         pygame.display.update()
+    #__Vòng lặp game over 
     while gameover:
             clock.tick(fps)
             #__Set Background
